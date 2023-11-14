@@ -5,6 +5,10 @@ const autoDetails = document.querySelector(".auto-details");
 // const fuelType = document.querySelector(".fuel_type")
 // const price = document.querySelector(".price")
 
+// if (!autoDetails.hasChildNodes){
+
+let flag = true;
+
 async function getAutosData() {
 
   const autosUrl = "https://raw.githubusercontent.com/derkach2288/derkach2288-.github.io/main/autos.json";
@@ -23,27 +27,33 @@ async function getAutosData() {
     // fuelType.textContent = autosInfo[0].fuel_type;
     // price.textContent = autosInfo[0].price;
     
-    autosInfo.forEach((auto) => {
-      const div = document.createElement("div");
-      div.innerHTML = `
-        <p><strong>brand:</strong> ${auto.brand}</p>
-        <p><strong>model:</strong> ${auto.model}</p>
-        <p><strong>fuel Type:</strong> ${auto.fuel_type}</p>
-        <p><strong>price:</strong> ${auto.price}</p>
-        <br>
-      `
-
-      autoDetails.appendChild(div);
-      // brand.textContent = auto.brand;
-      // model.textContent = auto.model;
-      // fuelType.textContent = auto.fuel_type;
-      // price.textContent = auto.price;
-    })
+  
+      autosInfo.forEach((auto) => {
+        const div = document.createElement("div");
+        div.innerHTML = `
+          <p><strong>brand:</strong> ${auto.brand}</p>
+          <p><strong>model:</strong> ${auto.model}</p>
+          <p><strong>fuel Type:</strong> ${auto.fuel_type}</p>
+          <p><strong>price:</strong> ${auto.price}</p>
+          <br>
+        `
+  
+        if (flag){
+          autoDetails.appendChild(div);
+          flag = false;
+        }
+        autoDetails.appendChild(div);
+        // brand.textContent = auto.brand;
+        // model.textContent = auto.model;
+        // fuelType.textContent = auto.fuel_type;
+        // price.textContent = auto.price;
+      })
 
   } else {
     console.log("Some Error");
   }
 
 }
+  requestButton.addEventListener("click", getAutosData);
 
-requestButton.addEventListener("click", getAutosData);
+// }
